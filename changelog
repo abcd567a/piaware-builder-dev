@@ -1,0 +1,935 @@
+piaware (10.0~dev) UNRELEASED; urgency=medium
+
+  * Allow piaware startup without MAC address 
+
+ -- Nick Wan <nicholas.wan@flightaware.com>  Tue, 03 Dec 2024 20:44:22 +0000
+
+piaware (9.0.1) stable; urgency=medium
+
+  * Fix fa-mlat-client build on Buster
+
+ -- Oliver Jowett <oliver.jowett@flightaware.com>  Fri, 10 Nov 2023 11:52:57 +0800
+
+piaware (9.0) stable; urgency=medium
+
+  * Update to mlat-client 0.2.13
+  * Support bookworm
+  * Support arm64 on bullseye / bookworm
+  * Discontinue support for stretch
+  * faup1090: fix handling of negative FMS altitudes in DO-260A messages
+
+ -- Oliver Jowett <oliver.jowett@flightaware.com>  Mon, 06 Nov 2023 21:45:21 +0800
+
+piaware (8.2) stable; urgency=medium
+
+  * No change release for piaware 8.2
+
+ -- Eric Tran <eric.tran@flightaware.com>  Tue, 13 Dec 2022 22:04:00 -0600
+
+piaware (8.1) stable; urgency=medium
+
+  * No change release for piaware 8.1
+
+ -- Eric Tran <eric.tran@flightaware.com>  Wed, 07 Dec 2022 14:33:00 -0600
+
+piaware (8.0) stable; urgency=medium
+
+  * Add systemd watchdog support to mitigate unavoidable tcl-tls hangs (#87)
+  * Ratelimit restarts of faup1090/dump1090 due to location changes
+    to 1/minute
+  * Add support for flagging "widearea" receivers, for receivers that
+    gather data from a large geographic area and shouldn't assume a single
+    receiver location (#91)
+  * Add systemd drop-in file to fix Stretch upgrades having issues with new watchdog support
+
+ -- Eric Tran <eric.tran@flightaware.com>  Tue, 06 Dec 2022 12:58:00 -0600
+
+piaware (7.2) stable; urgency=medium
+
+  * Use tcl-tls 1.7.22-2 FA rebuild for Bullseye
+
+ -- Eric Tran <eric.tran@flightaware.com>  Wed, 09 Mar 2022 21:01:00 -0600
+
+piaware (7.1) stable; urgency=medium
+
+  * Fix unintented restart of piaware during a piaware-managed upgrade
+    (triggered by a behavioral change between debhelper compat 9 and compat 10)
+
+ -- Oliver Jowett <oliver.jowett@flightaware.com>  Tue, 11 Jan 2022 13:02:39 +0800
+
+piaware (7.0) testing; urgency=medium
+
+  * Uses mlat-client 0.2.12
+  * Caches dpkg-query results used in the piaware status file for an hour
+  * Adds new allow-ble-setup piaware-config variable
+  * Fixes broken logic with location setting
+  * Adds support for Bullseye; removes support for Jessie
+  * Update debhelper and python build dependencies; removes dh-systemd build dependency
+
+ -- Oliver Jowett <oliver.jowett@flightaware.com>  Tue, 11 Jan 2022 13:02:22 +0800
+
+piaware (6.1) stable; urgency=medium
+
+  * No-change rebuild for PiAware 6.1
+
+ -- Oliver Jowett <oliver.jowett@flightaware.com>  Mon, 06 Sep 2021 16:20:45 +0800
+
+piaware (6.0) stable; urgency=medium
+
+  * Include dump978-fa version at adept login and status.json
+  * Add adaptive gain & slow-cpu config options
+  * Add some helper scripts for piaware-gui to restart network/receiver
+  * Add some extra paranoia in run-apt-get
+  * Update adept fallback IP addresses and tweak host-shuffling logic
+
+ -- Eric Tran <eric.tran@flightaware.com>  Tue, 31 Aug 2021 07:30:00 -0600
+
+piaware (5.0) stable;  urgency=medium
+
+  * Make faup1090 pipe bidirectional to allow sending commands to faup
+  * Fix SD card only settings to be configurable on FFs too
+
+ -- Eric Tran <eric.tran@flightaware.com>  Thu, 11 Mar 2021 07:27:00 -6000
+
+piaware (4.0) stable; urgency=medium
+
+  * Avoid use of pyvenv to fix builds on recent Ubuntu/Kali (github issue #15)
+  * Fix bug where faup1090 was not using updated location when set via My ADS-B Stats
+
+ -- Eric Tran <eric.tran@flightaware.com>  Wed, 30 Sep 2020 09:34:00 -6000
+
+piaware (3.8.1) stable; urgency=medium
+
+  * Require a tcl-tls version that has the fastpath workaround
+
+ -- Eric Tran <eric.tran@flightaware.com>  Thu, 19 Mar 2020 12:12:00 -6000
+
+piaware (3.8.0) stable; urgency=medium
+
+  * Add Buster build support
+  * Retire wheezy build support
+  * Add build rule for Ubuntu Disco (not officially supported)
+  * Correctly recognize Pi 4 wifi/ethernet interfaces by MAC address
+  * Add "network-config-style" configuration option (used in sdcard images only)
+  * Remove "flightaware-user" and "flightaware-password" configuration options;
+    PiAware sites should be associated with user accounts by visiting the
+    appropriate claim URL on the FlightAware website
+  * Remove support for configuration files on removable USB media
+  * When using an alternative configuration file (specified via "-config"),
+    ignore the standard configuration files entirely (/boot/piaware-config.txt,
+    /etc/piaware.conf)
+  * Updates to the client/server communication protocol
+  * Use faup1090 from dump1090-fa 3.8.0
+  * Use faup978 from dump978-fa 3.8.0
+
+ -- Oliver Jowett <oliver.jowett@flightaware.com>  Mon, 30 Dec 2019 22:12:21 +0800
+
+piaware (3.7.2) stable; urgency=medium
+
+  * SkyAware renaming
+  * Relax itcl package requirement
+  * Fix misleading 'Couldn't open socket' piaware-status error
+  * Make piaware-status only report on enabled receiver types
+  * Remove obsolete piaware-config "-status" option
+  * Add Stratux dongle support
+  * Separate receiver and uat-receiver-type config types
+
+ -- Eric Tran <eric.tran@flightaware.com>  Mon, 09 Sep 2019 01:53:00 -6000
+
+piaware (3.7.1) stable; urgency=medium
+
+  * Fix gpsd bug
+  * Add Mode S/UAT program status in status.json
+  * Add support for separate Mode S and UAT radio indicators
+
+ -- Eric Tran <eric.tran@flightaware.com>  Fri, 03 May 2019 01:43:00 -6000
+
+piaware (3.7.0.1) stable; urgency=medium
+
+  * Fix MLAT connect parameters
+
+ -- Eric Tran <eric.tran@flightaware.com>  Wed, 03 Apr 2019 11:06:00 -6000
+
+piaware (3.7.0) stable; urgency=medium
+
+  * Support for 978MHz UAT ADS-B via dump978-fa
+  * Add a config option 'use-gpsd' to allow disabling the use of
+    gpsd location info.
+  * Update to faup1090 from dump1090-fa 3.7.0
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Fri, 22 Mar 2019 15:59:09 +0000
+
+piaware (3.6.3) stable; urgency=medium
+
+  * Avoid rewriting the cached receiver location frequently when using a
+    GPS location source that has some position jitter
+  * Update to faup1090 from dump1090-fa 3.6.3
+  * Use useradd, not adduser, in postinst to avoid an extra dependency
+  * Build tweaks to support build automation
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Tue, 11 Sep 2018 14:54:40 +0100
+
+piaware (3.6.2) stable; urgency=medium
+
+  * Experimental support for building on Ubuntu 16.04 / 18.04
+  * Update to tcllauncher 1.8
+  * Update to faup1090 from dump1090-fa 3.6.2
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Fri, 27 Jul 2018 18:30:37 +0100
+
+piaware (3.6.1) stable; urgency=medium
+
+  * Update to faup1090 from dump1090-fa 3.6.1
+  * Support for building on Stretch
+  * Extra paranoia when parsing messages from gpsd
+  * Improve detection of clock skew
+  * Run pirehose certificate generation only when needed
+  * Add config support for "wireless-country" option
+  * Fix mlat backfeed detection to handle the extended data format
+  * Handle errors while writing the piaware status file gracefully
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Mon, 16 Jul 2018 15:02:30 +0100
+
+piaware (3.6.0) stable; urgency=medium
+
+  * Update to faup1090 from dump1090-fa 3.6.0 for extended data reporting
+  * Rework the piaware/adept protocol to handle the extended data formats
+  * Initial release of pirehose, which produces streaming ADS-B data from
+    local receiver data in the same format as FlightAware's Firehose service.
+    Enable with "piaware-config enable-firehose yes"
+  * Add some additional sync paranoia to minimize the chance of corrupting
+    configuration if modified immediately before power loss
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Wed, 09 May 2018 22:33:45 +0100
+
+piaware (3.5.3) stable; urgency=medium
+
+  * Skip 3.5.2 to align with piaware-support versioning
+  * Add mlat data license text
+  * Avoid leaking FDs in more error cases
+  * Report assigned feeder ID in piaware-status
+  * Config changes to support FlightFeeders
+  * Allow freeform rtlsdr-device-index config values
+  * Update to faup1090 from dump1090-fa 3.5.3
+  * Update to mlat-client 0.2.10
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Fri, 03 Nov 2017 22:45:57 +0000
+
+piaware (3.5.1) stable; urgency=medium
+
+  * Change log timestamp format to ISO8601
+  * Run dpkg --configure -a before apt-get update, in case the local
+    package state is hosed
+  * Validate MAC address and UUID format when changing configuration
+    via piaware-config
+  * Tell adept when we are using a UUID from the local cache dir, but
+    it is not writable
+  * Update list of fallback adept host IPs
+  * Randomize the order of fallback host IPs each time to load-balance
+    between them
+  * On upgrade, remove mlat result configs that forward to third parties
+    (previous check extended to catch some additional cases)
+  * Update to faup1090 from dump1090-fa 3.5.1
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Mon, 31 Jul 2017 18:10:16 +0100
+
+piaware (3.5.0) stable; urgency=medium
+
+  * Minor tweaks to feeder ID reporting
+  * Update to faup1090 from dump1090-fa 3.5.0, fa-mlat-client 0.2.9
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Mon, 03 Apr 2017 17:57:49 +0100
+
+piaware (3.4.0) stable; urgency=medium
+
+  * Add bladeRF configuration support.
+  * Restart piaware after a remotely-initiated all-packages upgrade.
+  * Run apt-get clean after upgrade to keep the apt cache size down.
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Thu, 09 Feb 2017 17:40:44 +0000
+
+piaware (3.3.0) stable; urgency=medium
+
+  * Report piaware image type correctly for package installs where there
+    is more than one package matching 'piaware*'; this fixes the available
+    stats page commands for those installs.
+  * Support for running piaware directly on a Radarcape (receiver type
+    "radarcape-local"); a version of piaware configured to use this will be
+    included in future Radarcape software releases.
+  * Rename "modeac" to "allow-modeac"; Mode A/C will be enabled when requested
+    if allow-modeac is yes; the default is to allow this.
+  * Fix logrotate config file problems when running the wheezy package on a jessie
+    install (fixes github issue #8)
+  * Experimental support for running multiple copies of piaware on a single host
+    ("-configfile" and "-cachedir" options). For now, you should also set
+    "force-macaddress" uniquely on each copy.
+  * Experimental support for identifying piaware feeders by a UUID rather than MAC
+    address (server-side support to follow)
+  * Experimental support for Mode A/C multilateration (server-side support to
+    follow)
+  * Update to faup1090 from dump1090-fa 3.3.0, fa-mlat-client 0.2.8
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Mon, 16 Jan 2017 14:13:16 +0000
+
+piaware (3.2.0) stable; urgency=medium
+
+  * New configuration options:
+    * mlat-results-anon: if set to "no", no anonymous mlat results are
+      generated (those results are just dropped entirely)
+    * modeac: if set to "yes", mode A/C decoding is enabled and port 30005
+      will include mode A/C by default
+    * force-macaddress: can be used to set the MAC address used for site
+      selection; this is an experimental feature, no support is available,
+      it may go away in the future
+  * More tweaks to MAC address detection to try to be more consistent about
+    which address is picked with unusual setups
+  * faup1090 tweaks and bugfixes
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Tue, 25 Oct 2016 23:41:43 +0100
+
+piaware (3.1.0) stable; urgency=medium
+
+  * Create a pidfile when using systemd to match what the init script does
+  * Open logfiles earlier, so the log gets the pidfile-created message
+  * Restart piaware automatically during non-piaware-mediated package upgrades
+  * Don't leak FDs when running subprocesses if fork or one of the redirects fails
+  * Support quoted config values for values that need to contain special characters
+  * Avoid some tcl 8.6.2 memory leaks
+  * Allow faup1090 to report data that does not include a hexid
+  * Fix support for data feeds from ports other than 30005
+  * Improve piaware-status output to know about the receiver/port configuration
+  * Update faup1090 for reporting/decoding changes:
+    * Overhaul/cleanup the Mode S decoder
+    * Prefer ES data over non-ES Mode S data when both are available
+    * Improve the reliability of air/ground detection
+    * Increase report frequency for surface targets, or things that look like they
+      might be surface targets; report air/ground changes immediately
+    * Report datalink capabilities, ES target status, ES operational status,
+      ACAS RA reports when they change
+    * Report magnetic heading, IAS, TAS, GNSS altitude, ident source, category
+      where available
+    * Report data involving non-ICAO addresses (e.g. TIS-B track file data)
+    * Report the address qualifier for things that are not DF17 ADS-B
+  * On upgrade, remove mlat result configs that forward to third parties
+    as FlightAware's policy for acceptable use of that data has changed
+  * On upgrade from PiAware 2, put a note in /tmp/piaware.out about the change in
+    logfile location
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Thu, 22 Sep 2016 17:06:57 +0100
+
+piaware (3.0.5) stable; urgency=medium
+
+  * No-change rebuild for 3.0.5
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Wed, 31 Aug 2016 12:40:11 +0100
+
+piaware (3.0.4) stable; urgency=medium
+
+  * Fix piaware-status process reporting
+  * When upgrading, try harder to recover from interrupted upgrades and
+    dependency problems
+  * Allow config files to have different EOL conventions when writing them out.
+  * Set /boot/piaware-config.txt to use CRLF EOL convention
+  * If piaware exits with an unrecoverable error (e.g. login failure), don't
+    restart it
+  * If the exec of a fork-and-exec fails, kill the child process abruptly
+    rather than letting tcl exit normally, to avoid interfering with any
+    inherited file descriptors. (Mostly affects non-Debian systems e.g. Arch)
+  * Patch cxfreeze to support building with Python 3.5
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Fri, 19 Aug 2016 14:00:48 +0100
+
+piaware (3.0.3) stable; urgency=medium
+
+  * Fix a case where piaware could hang while doing a TLS handshake with
+    adept if the network failed at the wrong time.
+  * Ensure we force updated config files to disk immediately, so that a
+    badly-timed crash is less likely to toast data. (If it's living on a
+    FAT filesystem, we can't guarantee that, but we can reduce the window)
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Mon, 01 Aug 2016 12:25:04 +0100
+
+piaware (3.0.2) stable; urgency=medium
+
+  * Write a placeholder /tmp/piaware.out to direct users to the new log location
+  * Update mlat-client to v0.2.6
+  * Update faup1090 to v3.0.2
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Wed, 27 Jul 2016 17:15:17 +0100
+
+piaware (3.0.1) stable; urgency=medium
+
+  * A complete overhaul of the configuration system
+  * systemd / jessie support
+  * Run as a less-privileged user, not as root. Specific tasks that require
+    root are handled by helper scripts invoked via sudo
+  * Upgrades are now handled via an apt repository and apt-get, rather than
+    by directly downloading individual packages.
+  * IPv6 support
+  * Support getting receiver position information from a local gpsd
+  * Write the receiver location to an environment file for use by dump1090
+  * Moved logs to /var/log/piaware.log, with log rotation (either directly,
+    or via systemd)
+  * Write a status file to /run/piaware/status.json for use in health monitoring
+  * Many smaller bugfixes and robustness improvements
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Fri, 15 Jul 2016 13:02:38 +0100
+
+piaware (2.1-5) unstable; urgency=medium
+
+  * Correctly handle connection errors during socket creation.
+  * Improve early connection liveness checks.
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Thu, 17 Dec 2015 01:15:44 +0000
+
+piaware (2.1-4) unstable; urgency=medium
+
+  * Update CA certificates used to validate piaware connections.
+  * Log more info when we get errors/alerts from openssl.
+  * Continue trying to reconnect if a connection fails because validation fails.
+  * Be more careful about how we deal with timers to avoid duplicates or missing timers.
+  * Avoid a tcl segfault when running on tcl 8.6.[012]
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Mon, 14 Dec 2015 19:34:56 +0000
+
+piaware (2.1-3) unstable; urgency=medium
+
+  * Update to mlat-client 0.2.4:
+    * Fix exception reporting when using cxfreeze.
+    * Periodically report server synchronization status.
+    * Report Mode S vs ADS-B aircraft counts.
+    * Report UDP statistics to the server so it can notice UDP message loss.
+
+  * Move all helpers (faup1090, fa-mlat-client) to /usr/lib/piaware/helpers.
+
+  * Always use the packaged helpers, don't try $PATH.
+
+  * Pass --stdout to faup1090 to provoke an error if it's an old version that
+    doesn't write to stdout.
+
+  * Report the versions of installed dump1090 packages on login.
+
+  * Grab a lock on the piaware pidfile to avoid ever running two copies.
+
+  * Filter mlat results if they somehow get looped back to faup1090 without
+    the timestamp that identifies them as being mlat results.
+
+  * Fix piaware-status when a non-English locale is used. (github issue #22)
+
+  * Change the default mlat results port to 30104, so that it will not
+    automatically connect to a non-mlat-aware dump1090. If you do want to
+    connect to a non-mlat-aware dump1090 listening on the default port 30004,
+    you can do this via "piaware-config -mlatResultsFormat
+    beast,connect,localhost:30004". Please be careful that mlat results do
+    not get forwarded to places that don't want to see them if you do this.
+    (github issue #24)
+
+  * Add -show option to piaware usage. (github pull request #23)
+
+  * Update failsafe FlightAware server IPs to reflect the servers currently
+    in use. Only use the failsafes if the connection to piaware.flightaware.com
+    actually fails outright twice.
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Mon, 28 Sep 2015 00:00:39 +0100
+
+piaware (2.1-2) unstable; urgency=medium
+
+  * Add piaware-config -mlatResultsFormat, which gives control over the
+    format(s) and ports that mlat results are provided on.
+
+  * Use fa-mlat-client 0.2.3 which includes bugfixes for Basestation-format
+    result output.
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Thu, 09 Jul 2015 12:29:23 +0100
+
+piaware (2.1-1) unstable; urgency=medium
+
+  * Always use the version of faup1090 packaged with piaware to do message
+    translation from the raw form provided by dump1090 et al; don't rely on
+    the translation rules provided by anything listening on port 10001.
+
+  * Pass the receiver location specified via the FlightAware website to
+    faup1090 so that it is available for position decoding.
+
+  * Update fa-mlat-client to support display of multilateration results
+    returned from the FlightAware servers. The default configuration will
+    convert these results to synthetic Beast-format messages and pass them
+    to the local dump1090 on port 30004 for display on the local map.
+    This may be disabled by "piaware-config -mlatResults 0".
+
+  * Report CPU load in periodic health messages.
+
+  * Preserve the timestamp that faup1090 provides in aircraft updates; this
+    may be some time in the past if the report used older data. Separately
+    report the time that the report was forwarded to FlightAware. This helps
+    the FlightAware servers put the right time information on reports that
+    have slightly stale (up to 30s old) data.
+
+  * Tweaks to piaware's self-restart to hopefully be more robust and avoid
+    leaving duplicate piaware processes around.
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Thu, 02 Jul 2015 17:18:46 +0100
+
+piaware (2.0-7) unstable; urgency=medium
+
+  * faup1090 updates to fix a couple of decoding and connection heartbeat
+    issues introduced in 2.0-6.
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Mon, 29 Jun 2015 13:33:49 +0100
+
+piaware (2.0-6) unstable; urgency=medium
+
+  * Use faup1090 from dump1090-mutability. As dump1090-mutability makes many
+    decoding decisions differently to the previous version of faup1090, and
+    there are additional changes to the rules for when positions are emitted,
+    you may see changes to the number of positions recorded by FlightAware.
+  * Change connection buffering to avoid triggering Nagle's algorithm all the
+    time.
+
+ -- Oliver Jowett <oliver@mutability.co.uk>  Sun, 28 Jun 2015 12:08:34 +0100
+
+piaware (2.0-5) unstable; urgency=medium
+
+  * Improve package version reporting.
+  * Improve mlat client logging; propagage client messages back to FlightAware so
+    they appear in the ADS-B stats page log window.
+  * Be more selective about what dump1090 init.d script we pick when trying to
+    restart it.
+  * Use invoke-rc.d to invoke init.d scripts, so we don't try to start a service
+    that is disabled in the current runlevel.
+  * Use cxfreeze to package the included copy of fa-mlat-client, which should
+    improve portability between Raspbian versions.
+  * Try to use the packaged mlat client if present; fall back to anything on
+    $PATH if it's not present.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Fri, 19 Jun 2015 10:04:27 +0100
+
+piaware (2.0-4) unstable; urgency=medium
+
+  * Increase timeout for downloads to accomodate larger piaware packages
+    due to MLAT.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Wed, 10 Jun 2015 17:13:26 +0000
+
+piaware (2.0-3) unstable; urgency=medium
+
+  * Make the mlat client follow piaware's daily log rotation correctly.
+  * Support UDP transport for most of the mlat client traffic. This greatly reduces
+    piaware's CPU requirements.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Wed, 03 Jun 2015 00:12:37 +0100
+
+piaware (2.0-2) unstable; urgency=low
+
+  * MLAT beta release, possibly not broken
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Sun, 31 May 2015 18:09:33 +0100
+
+piaware (2.0-1) unstable; urgency=low
+
+  * MLAT beta release
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Sun, 31 May 2015 15:26:06 +0100
+
+piaware (1.21-3) unstable; urgency=low
+
+  * Update MLAT client to fa-mlat-client 0.1.14.1
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Sun, 31 May 2015 14:33:05 +0100
+
+piaware (1.21-2) unstable; urgency=low
+
+  * Include MLAT package within piaware.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Sat, 30 May 2015 19:57:03 +0000
+
+piaware (1.21-1) unstable; urgency=low
+
+  * Enable MLAT by default (internal testing)
+
+  * Connect to multiple backends
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Fri, 29 May 2015 15:14:36 +0000
+
+piaware (1.20-2) unstable; urgency=low
+
+  * MLAT (internal testing)
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Fri, 28 May 2015 00:34:48 +0000
+
+piaware (1.20-1) stable; urgency=high
+
+  * Greatly improved range and message rate by configuring dump1090 to use
+    auto-gain rather than max gain ("--gain -10" added to dump1090 arguments).
+    Sites allowing remote upgrade will be upgraded automatically.  People
+    running their own copies of dump1090 are advised to add "--gain -10" to
+    their dump1090 command line arugments to obtain these same improvements.
+
+  * Allow piaware to upgrade a package (piaware or dump1090) even if the
+    current version can't be determined, like when it isn't installed.
+    Since previous versions of the piaware bootable image shipped with
+    dump1090 but dump1090 wasn't installed as a dpkg, piaware can't
+    upgrade dump1090 through the manual or automatic installer.
+
+  * Make piaware exit if it asks for a restart of itself but didn't die.
+
+  * piaware's process ID number is now logged in piaware shutdown messages so
+    the log isn't confusing if the old version is still exiting while the new
+    one is already running.  (People upgrading from 1.19-3 will still see the
+    potentially confusing messages; future upgrades from 1.20-1 will have
+    clearer log messages.)
+
+  * When piaware is looking for a dump1090 control script in /etc/init.d, make
+    sure it prefers like fadump1090.sh to fadump1090.sh.dpkg-old.
+
+  * Bug fix to make renaming /tmp/piaware.out to /tmp/piaware.out.yesterday to
+    be more likely to occur on the UTC day boundary.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Wed, 04 Feb 2015 21:50:26 +0000
+
+piaware (1.19-3) stable; urgency=medium
+
+  * The 1.19-2 package was corrupted.  We always bump the version for every
+    change due to CDN caching and whatnot.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Tue, 30 Dec 2014 22:32:41 +0000
+
+piaware (1.19-2) stable; urgency=medium
+
+  * Compress the ADS-B messages, not just the non-ADS-B messages.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Tue, 30 Dec 2014 21:02:44 +0000
+
+piaware (1.19-1) stable; urgency=medium
+
+  * New compression techniques reduce upstream bandwidth by 2/3rds without
+    filtering any additional messages.
+
+  * Disconnect from the server after many unrecognized server messages.
+
+  * Report full version when running piaware -v to get version number.
+
+  * Remove raspi-copies-and-fills from dependencies.  This makes the piaware
+  Debian package compatible with more systems not based on Raspberry Pi.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Sun, 28 Dec 2014 19:41:14 +0000
+
+piaware (1.18-2) stable; urgency=medium
+
+  * Principally this release is to bump the version number because the
+    1.18-1 SD card image zip file was corrupt.
+
+  * Reload adept config on update request in case piaware-config has been
+    run and used to change something since piaware last started.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Tue, 19 Nov 2014 17:52:42 +0000
+
+piaware (1.18-1) stable; urgency=medium
+
+  * Fix "too many nested evaluations" error on systems without an eth0 device.
+
+  * Include full piaware version (like 1.18-1 vs just 1.18) in login message.
+
+  * Cache the mac address once it is known, for performance.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Tue, 18 Nov 2014 20:18:03 +0000
+
+piaware (1.17-2) stable; urgency=high
+
+  * Fix bug in reconnecting after receiving an unrecognized message
+    from the server.
+
+  * Get a mac address from alternate source like wlan0 if no eth0 is present
+
+  * Don't invoke rpi-update as part of a full update.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Tue, 18 Nov 2014 00:44:21 +0000
+
+piaware (1.17-1) stable; urgency=medium
+
+  * Disconnect/reconnect after detecting an error in a server message.
+    Although we don't believe the runaway logging is caused by a server
+    message, whatever the cause this should interrupt the runaway.
+
+  * After disconnecting from the server wait 60 seconds before reconnecting.
+    Again the goal here mainly is to slow things down.
+
+  * Don't continue through the server message handler if we get an error
+    reading from the server socket.
+
+  * Don't try to log errors about messages theoretically received from the
+    server, back to the server.
+
+  * Add a -showtraffic option to piaware to aid debugging.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Sat, 15 Nov 2014 15:46:30 +0000
+
+piaware (1.16-1) stable; urgency=medium
+
+  * Reworked problem detection and restart logic: Piaware will now reliably
+  attempt to restart dump1090 if no messages are received in an hour and
+  piaware can find a startup script for dump1090 in /etc/init.d to restart it
+  with.
+
+  * Piaware will now attempt to start dump1090 if no ADS-B producer program
+    is seen listening for connections on port 30005 (the "Beast" binary
+    data port) for more than six minutes.
+
+  * Most piaware messages logged locally are now also forwarded to
+    FlightAware.  This will greatly help with debugging and users will
+    soon be able to retrieve the last few hours of log messages via
+    the FlightAware website.
+
+  * New remote update capability for updating Raspbian and piaware.
+  Automatic and manual updates are supported.  Both can be enabled or
+  disabled on the device using piaware-config and auto updates can be
+  disabled by the user through the FlightAware website.  If enabled
+  the user will be able to issue manual updates through the FlightAware
+  website, updating PiAware, other Debian packages, and the operating
+  system and boot firmware as well as rebooting and restarting piaware
+  and dump1090.
+
+  * If the connection is lost with the FlightAware server then the reconnect
+  interval is randomized between 60 and 120 seconds rather than hard-set at
+  60 seconds to ease the server load when the adept server is restarted and
+  a thousand plus piaware hosts all reconnect at the same time
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Fri, 30 Oct 2014 13:44:36 +0000
+
+piaware (1.15-1) stable; urgency=medium
+
+  * Piaware will now attempt to restart dump1090 if no messages are
+  received in an hour.
+
+  * Multiple adept servers are now tried, round-robin.  The IP of the
+  FlightAware server is now listed as well as the hostname.
+
+  This allows connection in some cases where there are DNS problems
+  on the local host.
+
+  * Some addition versions of Linux are now supported.
+  (thanks to github user brookst (Tim Brooks) for this)
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Fri, 17 Oct 2014 21:11:39 +0000
+
+piaware (1.14-2) stable; urgency=medium
+
+  * Fix faup1090 bug introduced by recent service table fixes that made
+    it to open a listening socket on the Beast port, which was fatal to
+    faup1090 working properly.
+
+  * Reworked traffic checks and timing of traffic report to keep the
+    traffic report from interacting negatively with the traffic checks.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Thu, 09 Oct 2014 08:40:08 +0000
+
+piaware (1.14-1) stable; urgency=medium
+
+  * faup1090 now exits if it loses its connection.
+
+  Before this if dump1090 restarted for some reason then faup1090 would sit
+  there idefinitely and passing no data to piaware, even after dump1090
+  came back.  Hat tip to Oliver Jowett (github user "mutability") for the fix.
+
+  * faup1090 services table bug fix
+
+  A mistake in how the services table was defined in faup1090 caused faup1090
+  to go past the end of the table when initializing and manipulating the
+  TCP listening port.  It's a wonder it didn't cause a coredump.
+  Hat tip again to Oliver Jowett for pointing out the bug...
+
+  * Certificate validation failures on some other Linux systems' version of
+    OpenSSL have been fixed.  Hat tip to John Carroll (FA user johncarroll944)
+    for the fix.
+
+  * Tcllauncher updated to version 1.5
+
+  * Picked up numerous upstream dump1090 improvements and bug fixes, mostly
+    by Oliver Jowett, through Malcolm Robb's dump1090 on github:
+
+  * Improved client EOF handling.
+
+  * Check if bit correction happened before bailing out due to a bad CRC.
+
+  * Prefer to use global CPR decoding where possible.
+
+  * Add --stats-every option, add sample block counters
+
+  * Better error reporting if dump1090 is unable to bind a listening port.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Wed, 08 Oct 2014 10:59:55 +0000
+
+piaware (1.13-1) stable; urgency=medium
+
+  * piaware can now login without a FlightAware user's username and password
+    having been pre-configured on the Raspberry Pi.
+
+  * Stop shipping librtlsdr as faup1090 doesn't need it.
+
+  * Properly install non-executable files without executable bit set.
+
+  * piaware package is now digitally signed with a FlightAware developers key.
+
+  * Almost all Debian package "lintian" complaints have been fixed.
+
+  * Fix typo in faup1090 lost-connection message (thanks to github
+    user saiarcot895).
+
+  * All programs installed by piaware (piaware, piaware-config, piaware-status
+    and faup1090) now have manual pages.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Mon, 30 Sep 2014 12:49:09 +0000
+
+piaware (1.12) stable; urgency=medium
+
+  * Piaware 1.12 will correctly report version 1.12.  1.11 reported 1.10
+  and caused a fair bit of confusion.  Sorry.
+
+  * When piaware is up and successfully receiving and forwarding messages it
+  should now log only the every-five-minutes traffic summary.
+
+  * Any failure to determine the local IP address should no longer cause
+  problems.
+
+  * A few log messages shortened by having them not identify the function that
+  issued them.
+
+  * The net-tools package is now a prerequisite for PiAware.  This comes
+  installed by default on Raspberry Pi / Raspbian but may help people trying
+  to get PiAware working on other versions of Linux.
+
+  * If piaware can't determine the local machine's MAC address then it aborts
+  at startup.  This should only be relevant to people running PiAware on
+  something other than Raspberry Pi / Raspbian as other versions of Linux may
+  not provide the expected method piaware uses to figure that out.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Sat, 19 Sep 2014 15:17:09 +0000
+
+piaware (1.11) stable; urgency=medium
+
+  * Piaware now provides (hopefully) much more understandable log messages.
+    For instance, while the prior message might have been
+        reaped child 18593 SIG SIGHUP
+    The new message is
+    	the system confirmed that process $pid exited after receiving a hangup signal
+
+  * Piaware Now logs the number of ADS-B messages received in the reporting
+  interval (5 minutes) as well as cumulative, which makes it easier to see
+  how many messages you are getting without having to do arithmetic in your
+  head.
+
+  * When piaware is asked by the system to shutdown, its log messages now says
+  that in a more clear way.
+
+  * cryptic "not-connected-yet" logged in some cases as a message source
+  replaced by the hopefully less cryptic
+  "(not currently connected to an adsb source)", which may be true when
+  we have been connected but are no longer.
+
+  * we now log when we send a hangup signal and what process we are sending it to
+
+  * Raise time limit before reconnecting for no msgs
+
+    Previously after five minutes if it hadn't received any messages piaware
+    would kill and restart faup1090 and reconnect to it in order to get it
+    to reconnect to dump1090 or modesmixer or whatnot, just in case there
+    was a problem with the connection.
+
+    FlightAware user "fill" pointed out that in off hours it will be common for
+    many receivers to not see any messages for more than five minutes.
+
+    The timeout is raised to one hour and the log message now better explains
+    what's going on:
+
+    "no new messages received in $secondsSinceLast seconds, it might just be
+    that there haven't been any aircraft nearby but I'm going to possibly
+    restart faup1090 and definitely reconnect, just in case there's a problem
+    with the current connection..."
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Sat,  6 Sep 2014 17:13:29 +0000
+
+piaware (1.10) stable; urgency=medium
+
+  * At midnight UTC, renames /tmp/piaware.out to /tmp/piaware.out.yesterday
+  and starts a new /tmp/piaware.out
+
+  * Local IP address is sent in login and health messages.  With server-side
+  software that has yet to be written it'll provide a way for people to
+  figure out the local IP that their Pi is on.
+
+  * Bug fixed where it would log not-connected-yet when it was connected.
+
+  * The /etc/init.d/piaware script now references the full path to
+  start-stop-daemon and piaware-config, making PiAware work with
+  DarkBasic Minimal Rasbarian and being a better practice, anyway.
+  (Hat Tip to FlightAware user PeterHR for the report.)
+
+  * Periodic alive messages from the server are no longer logged after
+  the first one is received.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Sat,  6 Sep 2014 05:27:58 +0000
+
+piaware (1.9) stable; urgency=medium
+
+  * piaware now figures out whatever program is serving beast data on
+  port 30005 and is cool with it
+
+  * new piaware-status program to inspect and report on the running state
+  of the piaware toolchain
+
+  * piaware will now disconnect and reconnect from the ADS-B source and
+  restart faup1090 if messages aren't received for a while
+
+  * piaware now receives "alive" messages from the server (release 1.9 and
+  above) and will disconnect and reconnect after a timeout if one is not
+  received
+
+  * piaware server now disconnects if it hasn't received anything from piaware
+  for quite a while
+
+  * piaware server now tells piaware when it is going down before it
+  intentionally disconnects
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Sat, 30 Aug 2014 14:15:54 +0000
+
+piaware (1.8) stable; urgency=medium
+
+  * Fix traceback in piaware traffic report when no traffic has occurred.
+
+  * Fix traceback in connect retry code when piaware has trouble connecting
+  to FlightAware
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Sat, 30 Aug 2014 18:38:07 +0000
+
+piaware (1.7-1) unstable; urgency=low
+
+  * Remove the Tk toolkit as a dependency.
+
+  * Login failures are now successfully reported back to piaware and logged
+  in /tmp/piaware.out.
+
+  * Piaware will exit after a login failure as manual intervention to change
+  the user name and/or password is probably required.
+
+  * Piaware now starts receiving data sooner after startup, typically within
+  about ten seconds.
+
+  * Fix bug in keep_trying_to_connect that would cause it not to.
+
+  * When piaware is trying to reconnect to FlightAware after losing its server
+  conenction, its log messages are much more clear / descriptive.
+
+  * Failure of piaware to initially connect to FlightAware within ten seconds
+  resulted in piaware terminating.  Failure of piaware to reconnect
+  after losing a connection could result in a stuck piaware
+  that was running but wouldn't reconnect or forward messages.
+  Piaware now retries connections after connection failures both at startup
+  and after it has successfully connected.
+
+  * Piaware now logs in one log message the number of messages received from
+  dump1090 and the number of messages sent to FlightAware, one minute after
+  startup and every five minutes thereafter.  Previously it logged for
+  each thousand messages received and thousand messages sent the frequency
+  of which could be highly variable based on location and time of day.
+
+ -- FlightAware Developers <adsb-devs@flightaware.com>  Thu, 21 Aug 2014 05:49:14 +0000
